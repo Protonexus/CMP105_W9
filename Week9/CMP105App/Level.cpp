@@ -17,20 +17,32 @@ Level::~Level()
 // handle user input
 void Level::handleInput(float dt)
 {
+	if (input->isKeyDown(sf::Keyboard::Space))
+	{
+		input->setKeyUp(sf::Keyboard::Space);
+		beachBallManager.spawn();
+	}
 
+	if (input->isKeyDown(sf::Keyboard::Enter))
+	{
+		input->setKeyUp(sf::Keyboard::Enter);
+		q3Manager.spawn();
+	}
 }
 
 // Update game objects
 void Level::update(float dt)
 {
-	
+	beachBallManager.update(dt);
+	q3Manager.update(dt);
 }
 
 // Render level
 void Level::render()
 {
 	beginDraw();
-
+	beachBallManager.render(window);
+	q3Manager.render(window);
 	endDraw();
 }
 
